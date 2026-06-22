@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { Button } from "@heroui/react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,9 +48,10 @@ const Navbar = () => {
 
             <Link
               href="/register"
-              className="rounded-xl bg-black px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-900"
             >
+                <Button>
               Get Started
+              </Button>
             </Link>
           </div>
 
@@ -93,9 +95,10 @@ const Navbar = () => {
                 <Link
                   href="/register"
                   onClick={() => setIsOpen(false)}
-                  className="mt-2 block rounded-xl bg-black px-4 py-3 text-center font-medium text-white"
                 >
+                <Button className="w-full">
                   Get Started
+                  </Button>
                 </Link>
               </div>
             </div>

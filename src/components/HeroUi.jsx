@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
+import {ArrowRight} from '@gravity-ui/icons';
+import { Button } from "@heroui/react";
 const HeroUi = () => {
   return (
     <section className="relative overflow-hidden py-28">
@@ -22,8 +23,6 @@ const HeroUi = () => {
             With The Right Team
           </span>
         </motion.h1>
-
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -34,20 +33,15 @@ const HeroUi = () => {
           designers, marketers, and professionals. Publish your startup idea,
           recruit collaborators, and turn vision into reality.
         </motion.p>
-
-        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
           className="mt-10"
         >
-          <Link
-            href="/startups"
-            className="inline-flex items-center rounded-2xl bg-black px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-gray-900"
-          >
-            Explore Startups
-          </Link>
+        <Link href="/startups">
+         <Button>   Explore Startups  <ArrowRight /></Button>
+         </Link>
         </motion.div>
       </div>
     </section>
