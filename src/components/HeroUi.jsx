@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const Hero = () => {
+const HeroUi = () => {
   return (
     <section className="relative overflow-hidden py-28">
       {/* Background Effect */}
@@ -54,4 +54,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroUi;
