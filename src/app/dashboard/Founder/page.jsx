@@ -1,9 +1,13 @@
 import React from 'react'
+import Homepage from './Homepage'
+import FounderStats from './Founderstates'
+
 
 const page = () => {
   return (
      <div>
-      This is Founder Dashboard
+<Homepage />
+<FounderStats />
     </div>
   )
 }

@@ -4,17 +4,14 @@ import {Button, Drawer} from "@heroui/react";
 import Link from "next/link";
 import {
   LayoutDashboard,
-  Rocket,
-  Users,
-  FileCheck,
-  UserCheck,
-  Search,
-  Briefcase,
+  Building2,
+  PlusCircle,
+  BriefcaseBusiness,
   ClipboardList,
-  User,
-  Shield,
+  UserCircle,
+  Users,
+  Rocket,
   CreditCard,
-  Flag,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
@@ -22,63 +19,53 @@ export function DashboardSidebar() {
     const dashboardItems = {
   Founder: [
     {
-      name: "Dashboard",
+      name: "Overview",
       href: "/dashboard",
       icon: LayoutDashboard,
     },
     {
-      name: "Create Startup Profile",
-      href: "/dashboard/create-startup",
-      icon: Rocket,
+      name: "My Startup",
+      href: "/dashboard/my-startup",
+      icon: Building2,
     },
     {
-      name: "Post Team Requirements",
-      href: "/dashboard/team-requirements",
-      icon: Users,
+      name: "Add Opportunity",
+      href: "/dashboard/add-opportunity",
+      icon: PlusCircle,
     },
     {
-      name: "Review Applications",
-      href: "/dashboard/review-applications",
-      icon: FileCheck,
+      name: "Manage Opportunities",
+      href: "/dashboard/manage-opportunities",
+      icon: BriefcaseBusiness,
     },
     {
-      name: "Accept / Reject Applicants",
-      href: "/dashboard/manage-applicants",
-      icon: UserCheck,
+      name: "Applications",
+      href: "/dashboard/applications",
+      icon: ClipboardList,
     },
   ],
 
   Collaborator: [
     {
-      name: "Dashboard",
+      name: "Overview",
       href: "/dashboard",
       icon: LayoutDashboard,
     },
     {
-      name: "Browse Startups",
-      href: "/dashboard/startups",
-      icon: Search,
-    },
-    {
-      name: "Apply to Join Teams",
-      href: "/dashboard/opportunities",
-      icon: Briefcase,
-    },
-    {
-      name: "Track Application Status",
-      href: "/dashboard/applications",
+      name: "My Applications",
+      href: "/dashboard/my-applications",
       icon: ClipboardList,
     },
     {
-      name: "Personal Profile",
+      name: "Profile",
       href: "/dashboard/profile",
-      icon: User,
+      icon: UserCircle,
     },
   ],
 
   Admin: [
     {
-      name: "Dashboard",
+      name: "Overview",
       href: "/dashboard",
       icon: LayoutDashboard,
     },
@@ -88,19 +75,14 @@ export function DashboardSidebar() {
       icon: Users,
     },
     {
-      name: "Manage Startup Posts",
+      name: "Manage Startups",
       href: "/dashboard/manage-startups",
       icon: Rocket,
     },
     {
-      name: "View Transactions",
+      name: "Transactions",
       href: "/dashboard/transactions",
       icon: CreditCard,
-    },
-    {
-      name: "Moderate Activities",
-      href: "/dashboard/moderation",
-      icon: Shield,
     },
   ],
 };

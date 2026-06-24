@@ -1,9 +1,10 @@
 import React from 'react'
+import Homepage from './Homepage'
 
 const page = () => {
   return (
     <div>
-      This is startups page
+     <h1>Founder</h1>
     </div>
   )
 }

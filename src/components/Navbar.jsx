@@ -20,6 +20,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = authClient.useSession();
+  const role = session?.user?.role
   const pathName = usePathname();
   if(pathName.includes("dashboard")){
     return null;
@@ -65,7 +66,7 @@ const Navbar = () => {
            <h1 className="font-bold">{name} ({session?.user?.role})</h1>
           </Dropdown.Item>
           <Dropdown.Item id="dashboard" textValue="New file">
-          <Link href="/dashboard"> <Button variant="ghost"> <LayoutHeaderCellsLargeFill/> <span className="font-semibold">Dashboard</span> </Button>  </Link> 
+          <Link href={`/dashboard/${role}`}> <Button variant="ghost"> <LayoutHeaderCellsLargeFill/> <span className="font-semibold">Dashboard</span> </Button>  </Link> 
           </Dropdown.Item>
           <Dropdown.Item id="copy-link" textValue="Copy link">
             <Link href="/profile"><Button variant="ghost"><Person/> <span className="font-semibold">Profile</span></Button></Link> 
