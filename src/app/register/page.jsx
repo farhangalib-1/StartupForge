@@ -11,13 +11,16 @@ TextField,
 FieldError,
 } from "@heroui/react";
 import { uploadImageToImgBB } from "@/lib/actions/imageUpload";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 
 const RegisterPage = () => {
 const [role, setRole] = useState("Founder");
 const [preview, setPreview] = useState(null);
 const [imageFile, setImageFile] = useState(null);
 const [loading, setLoading] = useState(false);
-
+const route = useRouter()
 const handleImageChange = (e) => {
 const file = e.target.files?.[0];
 
@@ -54,14 +57,24 @@ try {
 
   console.log(userData);
 
-  // TODO:
-  // Create user using Better Auth
-  // Save additional user info to MongoDB
+  const { data, error } = await authClient.signUp.email({
+    name: userData.name,
+    email: userData.email,
+    password: userData.password,
+    image: userData.photoURL,
+    role: userData.role,
+    plan: "free",
 
+});
+ if(!error){
+  alert("Signup successfully"),
+  route.push("/")
+ 
+ }
 } catch (error) {
   console.error(error);
 } finally {
-  setLoading(false);
+
 }
 
 
