@@ -20,7 +20,7 @@ export function DashboardSidebar() {
   Founder: [
     {
       name: "Overview",
-      href: "/dashboard",
+      href: "/dashboard/Founder",
       icon: LayoutDashboard,
     },
     {
@@ -48,7 +48,7 @@ export function DashboardSidebar() {
   Collaborator: [
     {
       name: "Overview",
-      href: "/dashboard",
+      href: "/dashboard/Collaborator",
       icon: LayoutDashboard,
     },
     {
@@ -66,8 +66,9 @@ export function DashboardSidebar() {
   Admin: [
     {
       name: "Overview",
-      href: "/dashboard",
+      href: "/dashboard/Admin",
       icon: LayoutDashboard,
+      
     },
     {
       name: "Manage Users",

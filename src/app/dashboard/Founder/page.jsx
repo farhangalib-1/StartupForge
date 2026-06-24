@@ -1,5 +1,4 @@
 import React from 'react'
-
 import FounderStates from './Founderstates'
 import Homepage from './Homepage'
 
