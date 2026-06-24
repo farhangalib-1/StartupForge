@@ -1,8 +1,9 @@
 import React from 'react'
+import CreateStartupForm from './CreateStartupForm'
 const page = () => {
   return (
     <div>
-     <h1>My startup page</h1>
+     <CreateStartupForm />
     </div>
   )
 }
