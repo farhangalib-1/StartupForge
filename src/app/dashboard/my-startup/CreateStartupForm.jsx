@@ -47,11 +47,13 @@ export default function CreateStartupForm() {
       fundingStage,
       description,
       logoUrl,
-      email 
+      email,
+      status: "pending"
     };
     const result  = await createStartup(submissionPayload) 
     console.log("Final payload submitted:", result);
     alert("Startup created successfully!");
+    window.location.reload()
   };
 
   return (
