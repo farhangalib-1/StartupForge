@@ -5,11 +5,12 @@ import StartupCard from './StartupCard'
 
 const page = async() => {
   const result = await getStartUpData()
-  console.log(result[0])
+  const data = await result.json()
+  console.log(data[0])
   return (
     <div>
       {
-        result.length > 0 ? <div><StartupCard startup={result[0]} /></div> : <CreateStartupForm />
+        data.length > 0 ? <div><StartupCard startup = {data[0]}  /></div> : <CreateStartupForm />
       }
         
     </div>

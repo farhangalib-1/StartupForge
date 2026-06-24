@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell } from "lucide-react";
-import { Avatar } from "@heroui/react";
+import { Avatar, AvatarImage } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 
@@ -16,7 +16,7 @@ Dashboard </h1> </div>
     <Bell size={20} />
   </button>
 
-  <img
+  <Avatar
     src={image}
     name={session?.user?.name || "User"}
     className="w-10 h-10 rounded-full"
