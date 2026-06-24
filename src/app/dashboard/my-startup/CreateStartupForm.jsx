@@ -3,19 +3,21 @@
 import React, { useState } from "react";
 import { Form, TextField, Label, Input, TextArea, Select, ListBox, Button } from "@heroui/react";
 import { uploadImageToImgBB } from "@/lib/actions/imageUpload";
+import { createStartup } from "@/lib/actions/StartupPost";
+import { authClient } from "@/lib/auth-client";
 
 
-export default function CleanStartupForm() {
+export default function CreateStartupForm() {
+
+   const { data: session } = authClient.useSession();
+   const email = session?.user?.email
   const [startupName, setStartupName] = useState("");
   const [industry, setIndustry] = useState("");
   const [fundingStage, setFundingStage] = useState("");
   const [description, setDescription] = useState("");
-  
-  // ImgBB Upload States
   const [logoUrl, setLogoUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
-  // Using your custom external helper function
   const handleLogoChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -36,7 +38,7 @@ export default function CleanStartupForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     
     const submissionPayload = {
@@ -44,10 +46,11 @@ export default function CleanStartupForm() {
       industry,
       fundingStage,
       description,
-      logoUrl, 
+      logoUrl,
+      email 
     };
-
-    console.log("Final payload submitted:", submissionPayload);
+    const result  = await createStartup(submissionPayload) 
+    console.log("Final payload submitted:", result);
     alert("Startup created successfully!");
   };
 
@@ -70,7 +73,6 @@ export default function CleanStartupForm() {
 
         <Form onSubmit={handleSubmit} className="space-y-6">
           
-          {/* Startup Name */}
           <TextField isRequired>
             <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">
               Startup Name <span className="text-indigo-500">*</span>
@@ -84,12 +86,10 @@ export default function CleanStartupForm() {
             />
           </TextField>
 
-          {/* Logo Upload with Your External ImgBB Handler */}
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">Logo Image</span>
             <div className="flex gap-3 items-center">
-              
-              {/* Dynamic Image Preview Box */}
+
               <div className="flex items-center justify-center w-12 h-12 rounded-xl border border-slate-200 bg-slate-50 text-slate-400 shrink-0 overflow-hidden relative">
                 {logoUrl ? (
                   <img src={logoUrl} alt="Startup Logo" className="w-full h-full object-cover" />
@@ -100,7 +100,7 @@ export default function CleanStartupForm() {
                 )}
               </div>
               
-              {/* Interactive Upload Button matching Screenshot 2026-06-24 145145.png */}
+    
               <label className="flex-1 flex items-center justify-center px-4 py-3 border border-dashed border-indigo-200 bg-indigo-50/20 hover:bg-indigo-50/50 text-indigo-600 font-medium text-sm rounded-xl cursor-pointer transition-colors duration-200 text-center disabled:opacity-50">
                 <span>{isUploading ? "Uploading to Cloud..." : logoUrl ? "Change Logo" : "Upload Logo"}</span>
                 <input 
@@ -114,46 +114,78 @@ export default function CleanStartupForm() {
             </div>
           </div>
 
-          {/* Row Layout for Select Fields */}
+        
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Industry */}
-            <Select className="w-full" placeholder="Select industry" onSelectionChange={(keys) => setIndustry([...keys][0])}>
-              <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">
-                Industry <span className="text-indigo-500">*</span>
-              </Label>
-              <Select.Trigger className="w-full flex justify-between items-center rounded-xl border border-slate-200/80 bg-white px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200">
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox className="p-1 bg-white border border-slate-100 rounded-xl shadow-lg">
-                  <ListBox.Item id="tech" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Technology</ListBox.Item>
-                  <ListBox.Item id="health" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Healthcare</ListBox.Item>
-                  <ListBox.Item id="finance" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Finance</ListBox.Item>
-                </ListBox>
-              </Select.Popover>
-            </Select>
+          <Select
+  placeholder="Select Industry"
+  value={industry}
+  onChange={setIndustry}
+>
+  <Label>Industry</Label>
 
-            {/* Funding Stage */}
-            <Select className="w-full" placeholder="Select stage" onSelectionChange={(keys) => setFundingStage([...keys][0])}>
-              <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">
-                Funding Stage <span className="text-indigo-500">*</span>
-              </Label>
-              <Select.Trigger className="w-full flex justify-between items-center rounded-xl border border-slate-200/80 bg-white px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200">
-                <Select.Value />
-                <Select.Indicator />
-              </Select.Trigger>
-              <Select.Popover>
-                <ListBox className="p-1 bg-white border border-slate-100 rounded-xl shadow-lg">
-                  <ListBox.Item id="seed" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Seed</ListBox.Item>
-                  <ListBox.Item id="series-a" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Series A</ListBox.Item>
-                  <ListBox.Item id="series-b" className="rounded-lg px-3 py-2 text-sm hover:bg-slate-50 cursor-pointer">Series B+</ListBox.Item>
-                </ListBox>
-              </Select.Popover>
-            </Select>
+  <Select.Trigger>
+    <Select.Value />
+    <Select.Indicator />
+  </Select.Trigger>
+
+  <Select.Popover>
+    <ListBox>
+      <ListBox.Item id="Technology">
+        Technology
+      </ListBox.Item>
+
+      <ListBox.Item id="Healthcare">
+        Healthcare
+      </ListBox.Item>
+
+      <ListBox.Item id="Finance">
+        Finance
+      </ListBox.Item>
+
+      <ListBox.Item id="Education">
+        Education
+      </ListBox.Item>
+    </ListBox>
+  </Select.Popover>
+</Select>
+
+           
+         <Select
+  placeholder="Select Funding Stage"
+  value={fundingStage}
+  onChange={setFundingStage}
+>
+  <Label>Funding Stage</Label>
+
+  <Select.Trigger>
+    <Select.Value />
+    <Select.Indicator />
+  </Select.Trigger>
+
+  <Select.Popover>
+    <ListBox>
+      <ListBox.Item id="Seed">
+        Seed
+      </ListBox.Item>
+
+      <ListBox.Item id="Series A">
+        Series A
+      </ListBox.Item>
+
+      <ListBox.Item id="Series B">
+        Series B
+      </ListBox.Item>
+
+      <ListBox.Item id="Series C">
+        Series C
+      </ListBox.Item>
+    </ListBox>
+  </Select.Popover>
+</Select>
           </div>
 
-          {/* Description */}
+    
           <TextField isRequired>
             <Label className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">
               Description <span className="text-indigo-500">*</span>
@@ -167,7 +199,6 @@ export default function CleanStartupForm() {
             />
           </TextField>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             className="w-full !mt-8 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl shadow-[0_4px_12px_rgba(99,102,241,0.2)] hover:shadow-[0_4px_20px_rgba(99,102,241,0.35)] transition-all duration-200 active:scale-[0.98]"

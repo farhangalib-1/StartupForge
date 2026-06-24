@@ -8,7 +8,6 @@ import Image from "next/image";
 const DashboardNavbar = () => {
 const { data: session } = authClient.useSession();
 const image = session?.user?.image
-console.log(image)
 return ( <header className="flex h-16 items-center justify-between border-b bg-white px-6"> <div> <h1 className="text-xl font-semibold">
 Dashboard </h1> </div>
 
@@ -18,7 +17,7 @@ Dashboard </h1> </div>
   </button>
 
   <img
-    src={image || undefined}
+    src={image}
     name={session?.user?.name || "User"}
     className="w-10 h-10 rounded-full"
   />
