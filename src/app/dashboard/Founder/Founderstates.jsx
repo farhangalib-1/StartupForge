@@ -4,7 +4,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 
-const FounderStats = () => {
+const FounderStates = () => {
   const stats = [
     {
       title: "Total Opportunities",
@@ -61,4 +61,4 @@ const FounderStats = () => {
   );
 };
 
-export default FounderStats;
+export default FounderStates;

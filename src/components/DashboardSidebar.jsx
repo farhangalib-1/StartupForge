@@ -99,8 +99,9 @@ export function DashboardSidebar() {
                     </h1>
                   </Link>
                 {navItems.map((item) => (
+                <Link key={item.name} href={item.href}>
                   <button
-                    key={item.name}
+                    
                     className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default w-full"
                     type="button"
 
@@ -108,6 +109,7 @@ export function DashboardSidebar() {
                     <item.icon className="size-5 text-muted" />
                     {item.name}
                   </button>
+                  </Link>
                 ))}
     </nav>
       <Button variant="secondary" className="md:hidden">

@@ -1,13 +1,14 @@
 import React from 'react'
+
+import FounderStates from './Founderstates'
 import Homepage from './Homepage'
-import FounderStats from './Founderstates'
 
 
 const page = () => {
   return (
      <div>
 <Homepage />
-<FounderStats />
+<FounderStates />
     </div>
   )
 }
