@@ -93,3 +93,15 @@ export async function paymentData() {
   const data = await res.json();
   return data
 } 
+
+
+export async function approveStartup(id) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/startups/${id}`,
+    {
+      method: "PATCH",
+    }
+  );
+
+  return res.json();
+}
