@@ -9,7 +9,7 @@ const page = async() => {
   return (
     <div>
       {
-        result.length > 0 ? <div><StartupCard startup={result[0]} /></div> : <CreateStartupForm />
+        result.length > 0 ? <StartupCard startup={result[0]} /> : <CreateStartupForm />
       }
         
     </div>

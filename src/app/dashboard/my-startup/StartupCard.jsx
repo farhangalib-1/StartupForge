@@ -1,8 +1,11 @@
 "use client";
 
+import { deleteStartup } from "@/lib/actions/GetData";
 import { Card, Button, Chip } from "@heroui/react";
 import { Pencil, Trash2, Clock3 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 export default function StartupCard({ startup }) {
   const {
@@ -14,6 +17,14 @@ export default function StartupCard({ startup }) {
     status,
   } = startup;
 
+  const router = useRouter();
+  const handleDelete = async () => {
+  const result = await deleteStartup(startup._id);
+
+  if (result.deletedCount > 0) {
+    router.refresh();
+  }
+}
   return (
     <Card className="rounded-3xl border border-default-200 shadow-sm">
       <Card.Header className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 p-6">
@@ -62,6 +73,7 @@ export default function StartupCard({ startup }) {
           </Button>
           </Link>
           <Button
+          onClick={handleDelete}
             variant="danger-soft"
             
           >

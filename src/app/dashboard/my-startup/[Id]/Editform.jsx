@@ -5,10 +5,12 @@ import { Form, TextField, Label, Input, TextArea, Select, ListBox, Button } from
 import { uploadImageToImgBB } from "@/lib/actions/imageUpload";
 import { createStartup } from "@/lib/actions/StartupPost";
 import { authClient } from "@/lib/auth-client";
+import { updateStartup } from "@/lib/actions/GetData";
+import { useRouter } from "next/navigation";
 
 
 export default function Editform({startup}) {
-
+    const router = useRouter()
    const { data: session } = authClient.useSession();
    const email = session?.user?.email
   const [startupName, setStartupName] = useState(startup.startupName);
@@ -38,9 +40,9 @@ export default function Editform({startup}) {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const submissionPayload = {
       startupName,
       industry,
@@ -50,11 +52,14 @@ export default function Editform({startup}) {
       email,
       status: "pending"
     };
-    const result  = await createStartup(submissionPayload) 
-    console.log("Final payload submitted:", result);
-    alert("Startup created successfully!");
-    window.location.reload()
-  };
+
+    const result = await updateStartup(startup._id, submissionPayload);
+
+    console.log(result);
+    if(result.modifiedCount){
+    router.push("/dashboard/Founder");
+}
+}
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-slate-50/60 p-6 font-sans">
