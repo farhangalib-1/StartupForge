@@ -13,27 +13,14 @@ import {
 } from "@heroui/react";
 
 import { CirclePlus } from "lucide-react";
-import SlotLimitReached from "./SlotLimitReached";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { updateOpportunity } from "@/lib/actions/GetData";
 
 
 
-export default function OpportunityForm({result}) {
-  
-   const { data: session } = authClient.useSession();
-   const user = session?.user
-   console.log(user?.plan)
-    const route = useRouter()
-    let usedSlots = 0
-const freeSlots = Math.max(0, 3 - usedSlots);
-    if(user?.plan === "pro"){
-      usedSlots = 0
-    }
-    if(user?.plan==="free"){
-      usedSlots = result.length;
-    }
-    const hasFreeSlot = usedSlots < 3;
+export default function EditingOpportunity({opportunity}) {
+  const router = useRouter()
     const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -45,35 +32,30 @@ const freeSlots = Math.max(0, 3 - usedSlots);
     .split(",")
     .map((skill) => skill.trim());
 
-  console.log(data);
   const allData = {...data, status: "pending"}
+        const result = await updateOpportunity(
+    opportunity._id,
+    allData
+  );
+  console.log(result)
 
-  const result = await opportunities(allData)
-
+  if (result.modifiedCount > 0) {
+    router.push("/dashboard/manage-opportunities");
+    router.refresh();
+  }
   
 };
   return (
-    <>
-    {
-        hasFreeSlot ?  
+    <> 
         <Form onSubmit={handleSubmit} className="md:w-5/12 mx-auto w-full">
   <Card className="w-full rounded-3xl border border-default-200 shadow-sm">
     <Card.Header className="flex flex-col items-start gap-2 px-8 pt-8">
       <Card.Title className="text-3xl font-bold">
-        Add Opportunity
+        Edit Opportunity
       </Card.Title>
 
       <Card.Description className="text-default-500 text-base">
-        Post a role for your startup.
-        {
-          user?.plan === "pro" ?  <span className="text-warning font-medium">
-          {" "}
-          (You got unlimited slots used)
-        </span> : <span className="text-warning font-medium">
-          {" "}
-          ({usedSlots}/3 free slots used)
-        </span>
-        }
+        Edit your opportunities 
         
       </Card.Description>
     </Card.Header>
@@ -83,8 +65,7 @@ const freeSlots = Math.max(0, 3 - usedSlots);
         <Label>Role Title</Label>
       <Input
        name="roleTitle"
-         disabled={!hasFreeSlot}
-
+       defaultValue={opportunity.roleTitle}
         placeholder="e.g. Senior React Developer"
         description="comma-separated"
         variant="bordered"
@@ -94,7 +75,7 @@ const freeSlots = Math.max(0, 3 - usedSlots);
 <Label className="mt-2">Required Skills</Label>
       <Input
          name="requiredSkills"
-            disabled={!hasFreeSlot}
+         defaultValue={opportunity.requiredSkills.join(", ")}
         description="comma-separated"
         placeholder="e.g. React, TypeScript, Node.js"
         variant="bordered"
@@ -102,13 +83,11 @@ const freeSlots = Math.max(0, 3 - usedSlots);
         size="lg"
       />
 
-      {/* Selects */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
 
         <Select
           name="workType"
-            disabled={!hasFreeSlot}
-
+            defaultValue={opportunity.workType}
         >
           <Label>Work Type</Label>
 
@@ -136,8 +115,7 @@ const freeSlots = Math.max(0, 3 - usedSlots);
 
         <Select
           name="commitment"
-            disabled={!hasFreeSlot}
-
+            defaultValue={opportunity.commitment}
         >
           <Label>Commitment Level</Label>
 
@@ -170,7 +148,7 @@ const freeSlots = Math.max(0, 3 - usedSlots);
       </div>
 
       <Input
-        disabled={!hasFreeSlot}
+      defaultValue={opportunity.applicationDeadline}
       name="applicationDeadline"
         type="date"
         label="Application Deadline"
@@ -184,17 +162,16 @@ const freeSlots = Math.max(0, 3 - usedSlots);
 
     <Card.Footer className="px-8 pb-8">
       <Button
-       onClick={()=>window.location.reload()}
         type="submit"
         className="w-full h-14 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold text-lg"
       >
         <CirclePlus className="w-5 h-5" />
-        Post Opportunity
+        Edit Opportunity
       </Button>
     </Card.Footer>
   </Card>
-        </Form> : <SlotLimitReached />
-    }
+        </Form>
+    
   
 </>
   );

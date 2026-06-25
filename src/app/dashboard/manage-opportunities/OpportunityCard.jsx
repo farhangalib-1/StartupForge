@@ -7,8 +7,10 @@ import {
   Clock3,
   CircleDot,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function OpportunityCard({ opportunity }) {
+  console.log(opportunity)
   const {
     roleTitle,
     requiredSkills,
@@ -108,13 +110,14 @@ export default function OpportunityCard({ opportunity }) {
 
         {/* Footer */}
         <div className="flex justify-end gap-3 pt-2">
-
+          <Link href={`/dashboard/manage-opportunities/${opportunity._id}`}>
           <Button
             variant="outline"
             radius="lg"
           >
             Edit
           </Button>
+          </Link>
 
           <Button
             variant="danger-soft"
