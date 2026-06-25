@@ -4,3 +4,9 @@ export async function getStartUpData(){
     const res = await fetch(`${URL}/api/my-startups`)
     return res.json()
 }
+
+export async function getOpportunities() {
+       const res = await fetch(`${URL}/api/opportunities`)
+        return res.json()
+    
+}
