@@ -12,7 +12,7 @@ import Link from "next/link";
 import { deleteOpportunity } from "@/lib/actions/GetData";
 
 export default function OpportunityCard({ opportunity }) {
-  const router = useRouter
+  const router = useRouter()
   console.log(opportunity)
   const {
     roleTitle,
