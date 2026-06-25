@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache"
 
 const URL = process.env.NEXT_PUBLIC_SERVER_URL
 

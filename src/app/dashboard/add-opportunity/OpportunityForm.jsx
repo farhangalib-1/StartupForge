@@ -38,6 +38,7 @@ const hasFreeSlot = usedSlots < 3;
   console.log(data);
 
   const result = await opportunities(data)
+
   
 };
   return (
@@ -166,7 +167,7 @@ const hasFreeSlot = usedSlots < 3;
 
     <Card.Footer className="px-8 pb-8">
       <Button
-       onClick={()=>route.push("/dashboard/add-opportunity")}
+       onClick={()=>route.refresh()}
         type="submit"
         className="w-full h-14 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold text-lg"
       >
