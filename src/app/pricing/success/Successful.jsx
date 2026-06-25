@@ -67,26 +67,24 @@ const Successful = () => {
           </div>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
-
+            <Link href={"/dashboard/add-opportunity"}>
             <Button
-              as={Link}
-              href="/dashboard/add-opportunity"
               color="success"
               className="flex-1"
             >
               Post an Opportunity
             </Button>
-
+            </Link>
+            <Link href={"/dashboard/Founder"}>
             <Button
-              as={Link}
-              href="/dashboard"
+              
               variant="bordered"
               className="flex-1"
               endContent={<ArrowRight size={18} />}
             >
               Go to Dashboard
             </Button>
-
+            </Link>
           </div>
 
         </Card.Content>
