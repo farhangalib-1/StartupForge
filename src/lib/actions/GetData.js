@@ -15,3 +15,13 @@ export async function getOpportunities() {
         return res.json()
     
 }
+export async function getStartup(id) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my-startups/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  return res.json();
+}

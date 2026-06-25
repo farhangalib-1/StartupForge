@@ -2,6 +2,7 @@
 
 import { Card, Button, Chip } from "@heroui/react";
 import { Pencil, Trash2, Clock3 } from "lucide-react";
+import Link from "next/link";
 
 export default function StartupCard({ startup }) {
   const {
@@ -52,13 +53,14 @@ export default function StartupCard({ startup }) {
         </div>
 
         <div className="flex gap-3">
+          <Link href={`/dashboard/my-startup/${startup._id}`}>
           <Button
             variant="outline"
           >
              <Pencil size={18} />
             Edit
           </Button>
-
+          </Link>
           <Button
             variant="danger-soft"
             
