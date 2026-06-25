@@ -132,8 +132,9 @@ export default function FounderPricing() {
               ))}
 
             </div>
-
+              <form action={'/api/subscription'} method="POST">
             <Button
+                type="submit"
               size="lg"
               color="secondary"
               className="w-full mt-10"
@@ -141,6 +142,7 @@ export default function FounderPricing() {
             >
               Upgrade with Stripe
             </Button>
+            </form>
 
           </Card.Content>
         </Card>
