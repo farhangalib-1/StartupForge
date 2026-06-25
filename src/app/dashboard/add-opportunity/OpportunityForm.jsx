@@ -167,7 +167,7 @@ const hasFreeSlot = usedSlots < 3;
 
     <Card.Footer className="px-8 pb-8">
       <Button
-       onClick={()=>route.refresh()}
+       onClick={()=>window.location.reload()}
         type="submit"
         className="w-full h-14 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold text-lg"
       >
