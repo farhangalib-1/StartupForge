@@ -2,6 +2,7 @@
 
 import { Card, Button, Chip } from "@heroui/react";
 import { Crown, Rocket, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 export default function SlotLimitReached() {
   return (
@@ -57,7 +58,7 @@ export default function SlotLimitReached() {
           </div>
 
         </div>
-
+        <Link href="/pricing">
         <Button
           size="lg"
           className="mt-8 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-semibold"
@@ -65,6 +66,7 @@ export default function SlotLimitReached() {
         >
           Upgrade to Pro
         </Button>
+        </Link>
 
         <p className="mt-4 text-center text-sm text-default-400">
           Secure payment powered by Stripe.
