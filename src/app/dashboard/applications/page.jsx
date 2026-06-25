@@ -1,9 +1,10 @@
 import React from 'react'
+import EmptyApplicationCard from './EmptyApplicationCard'
 
 const page = () => {
   return (
     <div>
-      <h1>Application page</h1>
+      <EmptyApplicationCard />
     </div>
   )
 }
