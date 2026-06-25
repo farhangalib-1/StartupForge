@@ -9,9 +9,7 @@ export async function getStartUpData(){
 }
 
 export async function getOpportunities() {
-       const res = await fetch(`${URL}/api/opportunities`, {
-    cache: "no-store",
-  })
+       const res = await fetch(`${URL}/api/opportunities`)
         return res.json()
     
 }
