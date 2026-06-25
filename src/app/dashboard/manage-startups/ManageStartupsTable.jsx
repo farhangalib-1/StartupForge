@@ -4,7 +4,7 @@ import { Table, Chip, Button } from "@heroui/react";
 import { CircleCheckFill, TrashBin } from "@gravity-ui/icons";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { approveStartup } from "@/lib/actions/GetData";
+import { approveStartup, deleteStartup } from "@/lib/actions/GetData";
 
 export default function ManageStartupsTable({ startups }) {
     const router = useRouter();
@@ -19,6 +19,25 @@ export default function ManageStartupsTable({ startups }) {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+const handleDelete = async (id) => {
+  const confirmed = window.confirm(
+    "Are you sure you want to remove this startup?"
+  );
+
+  if (!confirmed) return;
+
+  try {
+    const result = await deleteStartup(id);
+
+    if (result.deletedCount > 0) {
+      alert("Startup removed successfully.");
+      router.refresh();
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong.");
   }
 };
   return (
@@ -146,6 +165,7 @@ export default function ManageStartupsTable({ startups }) {
                         <Button
                           variant="danger-soft"
                           size="sm"
+                          onClick={() => handleDelete(startup._id)}
                         >
                           <TrashBin className="w-4 h-4 mr-2" />
                           Remove
