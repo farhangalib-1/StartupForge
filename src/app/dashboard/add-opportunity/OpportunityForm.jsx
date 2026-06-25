@@ -14,10 +14,12 @@ import {
 
 import { CirclePlus } from "lucide-react";
 import SlotLimitReached from "./SlotLimitReached";
+import { useRouter } from "next/navigation";
 
 
 
 export default function OpportunityForm({result}) {
+    const route = useRouter()
     const usedSlots = result.length;
 const freeSlots = Math.max(0, 3 - usedSlots);
 const hasFreeSlot = usedSlots < 3;
@@ -164,7 +166,7 @@ const hasFreeSlot = usedSlots < 3;
 
     <Card.Footer className="px-8 pb-8">
       <Button
-        onClick={()=>window.location.reload()}
+       onClick={()=>route.push("/dashboard/add-opportunity")}
         type="submit"
         className="w-full h-14 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 text-white font-semibold text-lg"
       >
