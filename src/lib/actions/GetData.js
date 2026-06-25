@@ -74,3 +74,10 @@ export async function updateOpportunity(id, data) {
 
   return res.json();
 }
+export async function deleteOpportunity(id) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/opportunities/${id}`, {
+    method: "DELETE",
+  });
+
+  return res.json();
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Card, Chip, Button } from "@heroui/react";
 import {
   BriefcaseBusiness,
@@ -8,8 +9,10 @@ import {
   CircleDot,
 } from "lucide-react";
 import Link from "next/link";
+import { deleteOpportunity } from "@/lib/actions/GetData";
 
 export default function OpportunityCard({ opportunity }) {
+  const router = useRouter
   console.log(opportunity)
   const {
     roleTitle,
@@ -19,7 +22,25 @@ export default function OpportunityCard({ opportunity }) {
     applicationDeadline,
     status,
   } = opportunity;
+const handleDelete = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this opportunity?"
+  );
 
+  if (!confirmDelete) return;
+
+  try {
+    const result = await deleteOpportunity(opportunity._id);
+
+    if (result.deletedCount > 0) {
+      alert("Opportunity deleted successfully.");
+      router.refresh();
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong.");
+  }
+};
   return (
     <Card className="rounded-3xl border border-default-200 shadow-sm hover:shadow-lg transition-all duration-300">
       <Card.Content className="p-6 space-y-6">
@@ -120,6 +141,7 @@ export default function OpportunityCard({ opportunity }) {
           </Link>
 
           <Button
+          onClick={handleDelete}
             variant="danger-soft"
             radius="lg"
           >
