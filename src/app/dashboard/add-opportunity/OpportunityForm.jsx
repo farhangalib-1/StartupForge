@@ -45,8 +45,9 @@ const freeSlots = Math.max(0, 3 - usedSlots);
     .map((skill) => skill.trim());
 
   console.log(data);
+  const allData = {...data, status: "pending"}
 
-  const result = await opportunities(data)
+  const result = await opportunities(allData)
 
   
 };
