@@ -15,15 +15,24 @@ import {
 import { CirclePlus } from "lucide-react";
 import SlotLimitReached from "./SlotLimitReached";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 
 
 export default function OpportunityForm({result}) {
+   const { data: session } = authClient.useSession();
+   const user = session?.user
+   console.log(user?.plan)
     const route = useRouter()
-    const usedSlots = result.length;
+    let usedSlots = 0
 const freeSlots = Math.max(0, 3 - usedSlots);
-const hasFreeSlot = usedSlots < 3;
-    
+    if(user?.plan === "pro"){
+      usedSlots = 0
+    }
+    if(user?.plan==="free"){
+      usedSlots = result.length;
+    }
+    const hasFreeSlot = usedSlots < 3;
     const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,10 +63,16 @@ const hasFreeSlot = usedSlots < 3;
 
       <Card.Description className="text-default-500 text-base">
         Post a role for your startup.
-        <span className="text-warning font-medium">
+        {
+          user?.plan === "pro" ?  <span className="text-warning font-medium">
+          {" "}
+          (You got unlimited slots used)
+        </span> : <span className="text-warning font-medium">
           {" "}
           ({usedSlots}/3 free slots used)
         </span>
+        }
+        
       </Card.Description>
     </Card.Header>
 
