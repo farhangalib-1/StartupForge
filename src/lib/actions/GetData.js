@@ -81,3 +81,15 @@ export async function deleteOpportunity(id) {
 
   return res.json();
 }
+
+export async function getUsers(){
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`)
+  const data = await res.json();
+  return data 
+}
+
+export async function paymentData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/payment`)
+  const data = await res.json();
+  return data
+} 
