@@ -23,6 +23,7 @@ export default function OpportunityForm({result}) {
   
    const { data: session } = authClient.useSession();
    const user = session?.user
+   const id = user?.id
    console.log(user?.plan)
     const route = useRouter()
     let usedSlots = 0
@@ -46,7 +47,7 @@ const freeSlots = Math.max(0, 3 - usedSlots);
     .map((skill) => skill.trim());
 
   console.log(data);
-  const allData = {...data, status: "pending"}
+  const allData = {id, ...data, status: "pending"}
 
   const result = await opportunities(allData)
 

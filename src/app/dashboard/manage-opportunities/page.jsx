@@ -1,16 +1,22 @@
-import { getOpportunities } from '@/lib/actions/GetData'
+import { getMyOpportunities, getOpportunities } from '@/lib/actions/GetData'
 import React from 'react'
 import OpportunityCard from './OpportunityCard'
 import EmptyOpportunityCard from './EmptyOpportunityCard'
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
 
 const page = async() => {
-    const result = await getOpportunities()
-    console.log(result)
+    const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+    
+    const getOpportunitites = await getMyOpportunities(session?.user?.id)  
+  
   return (
     <div className='space-y-3'>
       {
-        result.length === 0 ? <EmptyOpportunityCard /> :
-        result.map(opportunity=><OpportunityCard key={opportunity._id} opportunity={opportunity} />)
+        getOpportunitites.length === 0 ? <EmptyOpportunityCard /> :
+        getOpportunitites.map(opportunity=><OpportunityCard key={opportunity._id} opportunity={opportunity} />)
       }
       
     </div>

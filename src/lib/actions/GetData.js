@@ -143,3 +143,11 @@ export async function getFeaturedStartups() {
 
   return res.json();
 }
+
+export async function getMyOpportunities(id){
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/myopportunities/${id}`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data
+}
