@@ -1,5 +1,5 @@
 "use client";
-
+import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -14,6 +14,11 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+    const handlesignIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+};
 const [loading, setLoading] = useState(false);
 
 const router = useRouter();
@@ -134,6 +139,16 @@ Forge </span> </Link>
         isLoading={loading}
       >
         Sign In
+      </Button>
+      <Button
+        onClick={handlesignIn}
+        variant="outline"
+        size="lg"
+        className="w-full"
+        isLoading={loading}
+      >
+        <FcGoogle />
+        Sign In with Google
       </Button>
     </Form>
 
