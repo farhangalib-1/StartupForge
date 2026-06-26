@@ -25,25 +25,17 @@ export default function NotFound() {
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-
+            <Link href="/">
           <Button
-            as={Link}
-            href="/"
+
+            
             color="primary"
             size="lg"
             startContent={<Home size={18} />}
           >
             Back to Home
           </Button>
-
-          <Button
-            as={Link}
-            href="/opportunities"
-            variant="bordered"
-            size="lg"
-          >
-            Browse Opportunities
-          </Button>
+          </Link>
 
         </div>
 

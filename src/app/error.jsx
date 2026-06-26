@@ -8,7 +8,7 @@ export default function Error({ error, reset }) {
   console.error(error);
 
   return (
-    <main className="min-h-[80vh] flex items-center justify-center px-6">
+    <main className="min-h-[80vh] flex items-center justify-center px-6 mb-6">
       <div className="max-w-xl text-center">
 
         <div className="mx-auto h-24 w-24 rounded-full bg-danger/10 flex items-center justify-center">
@@ -47,15 +47,15 @@ export default function Error({ error, reset }) {
             Try Again
           </Button>
 
+            <Link href="/">
           <Button
-            as={Link}
-            href="/"
             variant="bordered"
             size="lg"
-            startContent={<Home size={18} />}
           >
+            <Home size={18} />
             Go Home
           </Button>
+          </Link>
 
         </div>
 
