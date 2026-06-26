@@ -28,8 +28,11 @@ const user = userSession?.user;
       ],
       metadata:{
         priceId: PRICE_ID,
+        userName: user.name,
         userId: user.id,
-        userEmail: user.email
+        userEmail: user.email,
+        createAt: new Date(),
+        
       },
       mode: 'subscription',
       success_url: `${origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
