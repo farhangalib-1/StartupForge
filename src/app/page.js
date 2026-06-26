@@ -1,6 +1,7 @@
 import FeaturedStartups from "@/components/FeaturedStartups";
 import HeroUi from "@/components/HeroUi";
 import SuccessStories from "@/components/SuccessStories";
+import WhyJoinStartupForge from "@/components/WhyJoinStartupForge";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
     <HeroUi />
     <FeaturedStartups />
     <SuccessStories />
+    <WhyJoinStartupForge />
     
     </>
   );
