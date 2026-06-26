@@ -12,6 +12,7 @@ export default function CreateStartupForm() {
    const { data: session } = authClient.useSession();
    const email = session?.user?.email
    const userId = session?.user?.id
+   const founderName = session?.user?.name
   const [startupName, setStartupName] = useState("");
   const [industry, setIndustry] = useState("");
   const [fundingStage, setFundingStage] = useState("");
@@ -45,6 +46,7 @@ export default function CreateStartupForm() {
     const submissionPayload = {
       userId,
       startupName,
+      founderName,
       industry,
       fundingStage,
       description,

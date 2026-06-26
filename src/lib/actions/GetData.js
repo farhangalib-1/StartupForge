@@ -134,3 +134,12 @@ export async function getOwnStartUpData(userId) {
 
   return res.json();
 }
+
+
+export async function getFeaturedStartups() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/featured-startups`, {
+    cache: "no-store",
+  });
+
+  return res.json();
+}
