@@ -1,9 +1,17 @@
 import React from 'react'
+import TransactionHistoryTable from './TransactionHistoryTable'
+import { paymentData } from '@/lib/actions/GetData'
+import NoPurchase from './NoPurchase'
 
-const page = () => {
+const page = async() => {
+    const paymentHistory = await paymentData()
   return (
     <div>
-      transactions
+        {
+            paymentHistory.length === 0 ? <NoPurchase /> :  <TransactionHistoryTable payments={paymentHistory} />
+        }
+    
+     
     </div>
   )
 }
