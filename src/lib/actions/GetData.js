@@ -122,3 +122,15 @@ export async function updateProfile(userId, data) {
 
   return res.json();
 }
+
+
+export async function getOwnStartUpData(userId) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/ownstartups/${userId}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  return res.json();
+}

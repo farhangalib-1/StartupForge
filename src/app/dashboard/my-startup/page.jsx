@@ -1,10 +1,16 @@
 import React from 'react'
 import CreateStartupForm from './CreateStartupForm'
-import { getStartUpData } from '@/lib/actions/GetData'
+import { getOwnStartUpData} from '@/lib/actions/GetData'
 import StartupCard from './StartupCard'
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
 
 const page = async() => {
-  const result = await getStartUpData()
+  const session = await auth.api.getSession({
+  headers: await headers(),
+});
+
+  const result = await getOwnStartUpData(session?.user?.id)
   console.log(result)
   return (
     <div>
