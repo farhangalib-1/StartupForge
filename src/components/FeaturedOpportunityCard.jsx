@@ -10,6 +10,7 @@ import {
   CalendarDays,
   ArrowUpRight,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function FeaturedOpportunityCard({
   opportunity,
@@ -69,14 +70,16 @@ export default function FeaturedOpportunityCard({
           <BriefcaseBusiness size={16} />
           {opportunity.commitment}
         </div>
-
+        <Link href={`/opportunities/${opportunity._id}`}>
         <Button
           color="primary"
           variant="light"
-          endContent={<ArrowUpRight size={16} />}
+         
         >
           View Details
+          <ArrowUpRight size={16} />
         </Button>
+        </Link>
       </Card.Footer>
 
     </Card>
