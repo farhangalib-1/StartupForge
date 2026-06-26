@@ -1,5 +1,8 @@
 import { getFeaturedStartups } from "@/lib/actions/GetData";
 import FeaturedStartupCard from "./FeaturedStartupCard";
+import { Button } from "@heroui/react";
+import { MoveRight } from "lucide-react";
+import Link from "next/link";
 
 
 export default async function FeaturedStartups() {
@@ -25,6 +28,9 @@ export default async function FeaturedStartups() {
           />
         ))}
       </div>
+      <Link href="/startups">
+      <Button className={"mt-5"} variant="ghost"><div className="flex gap-2"> <h1>View All Startups</h1> <MoveRight /></div></Button>
+        </Link>
     </section>
   );
 }
