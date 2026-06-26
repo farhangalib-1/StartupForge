@@ -1,12 +1,17 @@
 import React from 'react'
 import OpportunityForm from './OpportunityForm'
-import { getOpportunities } from '@/lib/actions/GetData'
+import { getOpportunities, getStartUpData } from '@/lib/actions/GetData'
+import NoStartupFound from './NoStartupFound'
 
 const page = async() => {
     const result = await getOpportunities()
+    const startUpData = await getStartUpData()
   return (
     <div>
-      <OpportunityForm result={result} />
+      {
+        startUpData.length > 0 ? <OpportunityForm result={result} /> : <NoStartupFound />
+      }
+      
     </div>
   )
 }
