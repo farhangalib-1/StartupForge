@@ -6,7 +6,8 @@ import Link from "next/link";
 
 
 export default async function FeaturedStartups() {
-  const startups = await getFeaturedStartups();
+  const startupsData = await getFeaturedStartups();
+  const startups = startupsData.slice(0,3)
 
   return (
     <section className="w-11/12 mx-auto px-4 py-20">
