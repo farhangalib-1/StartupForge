@@ -1,3 +1,4 @@
+import FeaturedOpportunities from "@/components/FeaturedOpportunities";
 import FeaturedStartups from "@/components/FeaturedStartups";
 import HeroUi from "@/components/HeroUi";
 import SuccessStories from "@/components/SuccessStories";
@@ -9,8 +10,10 @@ export default function Home() {
     <>
     <HeroUi />
     <FeaturedStartups />
+    <FeaturedOpportunities />
     <SuccessStories />
     <WhyJoinStartupForge />
+   
     
     </>
   );
