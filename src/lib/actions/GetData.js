@@ -145,7 +145,7 @@ export async function getFeaturedStartups() {
 }
 
 export async function getMyOpportunities(id){
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/myopportunities/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/myallopportunities/${id}`, {
     cache: "no-store",
   });
   const data = await res.json();
